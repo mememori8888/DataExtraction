@@ -11,6 +11,13 @@
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6;
         }
+        /* スライダーの色を赤く変更 */
+        #request-slider::-webkit-slider-thumb {
+            background-color: #ef4444; /* Tailwindのred-500 */
+        }
+        #request-slider::-moz-range-thumb {
+            background-color: #ef4444; /* Tailwindのred-500 */
+        }
     </style>
 </head>
 <body class="bg-gray-100 p-8 flex justify-center items-center min-h-screen">
@@ -27,7 +34,7 @@
                     APIキーの設定
                 </h2>
                 <p class="text-gray-700 leading-relaxed mb-4">
-                    歯科医のIDチェック機能を利用するには、AIのAPIキーをご準備ください。
+                    データ抽出機能を利用するには、AIのAPIキーをご準備ください。
                     まずは、`api_key.json` ファイルを作成し、ご準備いただいたAPIキーを以下の形式で記述してください。
                 </p>
                 <div class="bg-gray-800 text-white rounded-lg p-4 font-mono overflow-auto text-sm">
