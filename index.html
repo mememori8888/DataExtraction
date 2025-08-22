@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>データ抽出プログラム</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8 flex justify-center items-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-2xl shadow-xl max-w-4xl w-full border border-gray-200">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">データ抽出プログラム</h1>
+        <p class="text-center text-lg text-gray-600 mb-10">APIを活用したデータ抽出プログラムの紹介です。ご利用にあたり、以下の手順に従って設定を行ってください。</p>
+
+        <div class="space-y-12">
+            <!-- 1. APIキーの設定 -->
+            <div class="p-6 bg-blue-50 rounded-xl border border-blue-200 shadow-sm">
+                <h2 class="text-2xl font-semibold text-blue-800 mb-4 flex items-center">
+                    <span class="bg-blue-600 text-white rounded-full h-8 w-8 flex items-center justify-center text-lg font-bold mr-3">1</span>
+                    APIキーの設定
+                </h2>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    歯科医のIDチェック機能を利用するには、AIのAPIキーをご準備ください。
+                    まずは、`api_key.json` ファイルを作成し、ご準備いただいたAPIキーを以下の形式で記述してください。
+                </p>
+                <div class="bg-gray-800 text-white rounded-lg p-4 font-mono overflow-auto text-sm">
+                    <pre>{
+  "api_key": "あなたのAPIキーをここに貼り付けてください"
+}</pre>
+                </div>
+                <p class="text-sm text-gray-500 mt-2">
+                    ※ APIキーは慎重に取り扱い、公開されないようにしてください。
+                </p>
+            </div>
+
+            <!-- 2. settings.jsonの設定 -->
+            <div class="p-6 bg-green-50 rounded-xl border border-green-200 shadow-sm">
+                <h2 class="text-2xl font-semibold text-green-800 mb-4 flex items-center">
+                    <span class="bg-green-600 text-white rounded-full h-8 w-8 flex items-center justify-center text-lg font-bold mr-3">2</span>
+                    settings.jsonの設定
+                </h2>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    次に、`settings.json` ファイルを作成し、GitHub Actionsの設定を行います。
+                    以下にサンプルを示します。各項目はプロジェクトに応じて設定してください。
+                </p>
+                <div class="bg-gray-800 text-white rounded-lg p-4 font-mono overflow-auto text-sm">
+                    <pre>[
+  {
+    "task_name": "funeral_search",
+    "query": "斎場||告別式||葬儀場||葬儀サービス||家族葬||一日葬||直葬||ホール||葬儀",
+    "address_csv_path": "address.csv",
+    "facility_file": "funeral.csv",
+    "review_file": "funeral_review.csv",
+    "update_facility_path": "funeral_add_data.csv",
+    "update_review_path": "funeral_add_review.csv"
+  }
+]</pre>
+                </div>
+                <ul class="text-gray-700 mt-4 space-y-2">
+                    <li>・<strong>`query`</strong>: 業種を指定するためのキーワードを設定します。</li>
+                    <li>・<strong>`address_csv_path`</strong>: 地域とリクエスト数を指定するCSVファイルへのパスです。</li>
+                    <li>・<strong>`facility_file`</strong>: 施設データを格納するファイルです。</li>
+                    <li>・<strong>`review_file`</strong>: レビューデータを格納するファイルです。</li>
+                    <li>・<strong>`update_facility_path`</strong>と<strong>`update_review_path`</strong>: 照合後に新しく増えたデータのみを記載するファイルです。</li>
+                </ul>
+            </div>
+
+            <!-- 3. main3_api_key_json.pyの起動 -->
+            <div class="p-6 bg-purple-50 rounded-xl border border-purple-200 shadow-sm">
+                <h2 class="text-2xl font-semibold text-purple-800 mb-4 flex items-center">
+                    <span class="bg-purple-600 text-white rounded-full h-8 w-8 flex items-center justify-center text-lg font-bold mr-3">3</span>
+                    `main3_api_key_json.py` の起動
+                </h2>
+                <p class="text-gray-700 leading-relaxed">
+                    上記の設定が完了したら、`main3_api_key_json.py` を起動してください。<br>
+                    GitHub Actionsの場合は、**Actions**タブをクリックして、**action name**を選択して起動します。<br>
+                    更新されたファイルはGitHubからダウンロードしてご利用いただけます。
+                </p>
+            </div>
+
+            <!-- 料金プラン -->
+            <div class="p-6 bg-red-50 rounded-xl border border-red-200 shadow-sm">
+                <h2 class="text-2xl font-semibold text-red-800 mb-4 flex items-center">
+                    <span class="bg-red-600 text-white rounded-full h-8 w-8 flex items-center justify-center text-lg font-bold mr-3">💰</span>
+                    API料金プラン
+                </h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    APIの料金は、**1000リクエストあたり35ドル**です。
+                    スライダーを動かして、リクエスト数に応じた料金をご確認ください。
+                </p>
+
+                <div class="flex items-center mb-4">
+                    <span class="text-gray-600 font-medium mr-4">リクエスト数:</span>
+                    <input type="range" id="request-slider" min="0" max="100000" step="1000" value="0" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                    <span id="request-count" class="text-xl font-bold text-red-600 ml-4 w-24 text-right">0</span>
+                    <span class="text-lg text-gray-500 ml-1">リクエスト</span>
+                </div>
+
+                <div class="relative h-64">
+                    <canvas id="cost-chart"></canvas>
+                    <div id="cost-display" class="absolute bottom-0 right-0 p-2 bg-red-600 text-white rounded-lg shadow-md text-sm">
+                        <span class="font-bold">料金:</span> <span id="current-cost" class="font-bold">$0.00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart.js ライブラリ -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        const slider = document.getElementById('request-slider');
+        const requestCount = document.getElementById('request-count');
+        const currentCost = document.getElementById('current-cost');
+        const costChartCtx = document.getElementById('cost-chart').getContext('2d');
+
+        // Chart.jsの設定
+        const costChart = new Chart(costChartCtx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: '料金 ($)',
+                    data: [],
+                    borderColor: 'rgb(239, 68, 68)',
+                    backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                    fill: true,
+                    tension: 0.1,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'リクエスト数'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: '料金 ($)'
+                        },
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `料金: $${context.parsed.y.toFixed(2)}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const updateChart = (requests) => {
+            const labels = [];
+            const data = [];
+            const step = 1000;
+            const maxRequests = requests > 50000 ? requests + 10000 : 50000; // スライダー値に合わせてグラフ範囲を調整
+
+            for (let i = 0; i <= maxRequests; i += step) {
+                const cost = (i / 1000) * 35;
+                labels.push(i);
+                data.push(cost);
+            }
+
+            costChart.data.labels = labels;
+            costChart.data.datasets[0].data = data;
+            costChart.update();
+        };
+
+        const updateCost = () => {
+            const requests = slider.value;
+            const cost = (requests / 1000) * 35;
+            requestCount.textContent = requests;
+            currentCost.textContent = `$${cost.toFixed(2)}`;
+            updateChart(parseInt(requests));
+        };
+
+        slider.addEventListener('input', updateCost);
+        
+        // 初期表示
+        updateCost();
+    </script>
+</body>
+</html>
